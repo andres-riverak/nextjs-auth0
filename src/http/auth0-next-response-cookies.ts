@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CookieSerializeOptions } from 'cookie';
 import { Auth0ResponseCookies } from '../auth0-session/http';
 

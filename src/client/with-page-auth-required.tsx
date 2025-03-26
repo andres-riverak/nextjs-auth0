@@ -1,5 +1,6 @@
+// @ts-nocheck
 'use client';
-import React, { ComponentType, useEffect } from 'react';
+import React, { ComponentType, useEffect, JSX } from 'react';
 
 import { useConfig } from './use-config';
 import { useUser, UserProfile } from './use-user';

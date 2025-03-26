@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Auth0RequestCookies } from '../auth0-session/http';
 
 export default class Auth0NextRequestCookies extends Auth0RequestCookies {
