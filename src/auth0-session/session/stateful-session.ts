@@ -50,7 +50,7 @@ export class StatefulSession<
   async getSession(req: Auth0RequestCookies): Promise<SessionPayload<Session> | undefined | null> {
     const config = await this.getConfig(req);
     const { name: sessionName } = config.session;
-    const cookies = req.getCookies();
+    const cookies = await req.getCookies();
     const keys = await this.getKeys(config);
     const sessionId = await getCookieValue(sessionName, cookies[sessionName], keys);
 

@@ -22,22 +22,29 @@ export default class Auth0NextResponseCookies extends Auth0ResponseCookies {
   public setCookie(name: string, value: string, options?: CookieSerializeOptions) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { cookies } = require('next/headers');
-    const cookieSetter = cookies();
-    try {
-      cookieSetter.set({ ...options, name, value });
-    } catch (_) {
-      warn();
-    }
+    cookies().then((cookieSetter) => {
+      try {
+        cookieSetter.set(
+          Object.assign(Object.assign({}, options), {
+            name,
+            value
+          })
+        );
+      } catch (_) {
+        warn();
+      }
+    });
   }
 
   public clearCookie(name: string, options?: CookieSerializeOptions) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { cookies } = require('next/headers');
-    const cookieSetter = cookies();
-    try {
-      cookieSetter.set({ ...options, name, value: '', expires: new Date(0) });
-    } catch (_) {
-      warn();
-    }
+    cookies().then((cookieSetter) => {
+      try {
+        cookieSetter.set(Object.assign(Object.assign({}, options), { name, value: '', expires: new Date(0) }));
+      } catch (_) {
+        warn();
+      }
+    });
   }
 }

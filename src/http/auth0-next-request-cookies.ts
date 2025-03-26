@@ -8,13 +8,10 @@ export default class Auth0NextRequestCookies extends Auth0RequestCookies {
   public getCookies(): Record<string, string> {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { cookies } = require('next/headers');
-    const cookieStore = cookies();
-    return cookieStore.getAll().reduce(
-      (memo: Record<string, string>, { name, value }: { name: string; value: string }) => ({
-        ...memo,
-        [name]: value
-      }),
-      {}
-    );
+    return cookies().then((cookieStore) => {
+      return cookieStore
+        .getAll()
+        .reduce((memo, { name, value }) => Object.assign(Object.assign({}, memo), { [name]: value }), {});
+    });
   }
 }
